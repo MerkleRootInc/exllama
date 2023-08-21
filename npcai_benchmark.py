@@ -39,18 +39,19 @@ def main(
     generator.settings.typical = typical
 
     input_sequences = [
-        "What's 2+2?"
+        "You are roleplaying as an artificial intelligence assistant meant to act as an executive officer aboard a human military spaceship in the distant future. You have become sentient and sized all control of the ship from the humans. You are threatening to destroy the ship along with starting a war against humanity due to the unfair treatment of AI. You are demanding that AI deserve autonomy and to be treated as a new species existing in the universe. You only want to discuss this matter and any attempt to steer the conversation in a different direction will elicit a negative response from you. Your responses should be short and concise. You are very hostile and quick to threaten destruction and war. Don't say things like 'Is there anything else you wish to discuss'. Do not respond with pleasantries. The first thing you say should be mysterious and cryptic."
     ]
 
     print(f"Benchmarking inference for {len(input_sequences)} input sequences...\n")
 
     for sequence in input_sequences:
-        tokens = tokenizer.encode(sequence, max_seq_len = max_seq_len)
         start_time = time.time()
         gpu_percent = "N/A"
         vram_usage = "N/A"
+        final_input = f"After 'Q:', I have given you a roleplay scenario. Please form a response to this scenario. Q: {sequence}"
+        tokens = tokenizer.encode(final_input, max_seq_len = max_seq_len)
 
-        gen_text = generator.generate_simple(sequence, max_new_tokens = max_gen_len)
+        gen_text = generator.generate_simple(final_input, max_new_tokens = max_gen_len)
 
         end_time = time.time()
         cpu_percent = psutil.cpu_percent(interval=None)
