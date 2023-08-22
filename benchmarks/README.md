@@ -2,7 +2,16 @@
 
 This directory contains a benchmark script for Llama models via Exllama. Please refer to this document for how to install a Llama model and run the benchmark script against it.
 
-## Step 1: Install git
+## Step 1: Install Python
+
+Run the following commands:
+
+```
+sudo apt-get install python3.10
+sudo apt install python3-pip
+```
+
+## Step 2: Install git
 
 Run the follow command:
 
@@ -11,20 +20,24 @@ sudo apt-get update
 sudo apt-get install git
 ```
 
-## Step 2: Clone and configure this repository
+## Step 3: Clone and configure this repository
 
 Run the following commands:
 
 ```
 cd ..
-git clone github.com/NPCAI-Studio/exllama.git
-cd llama-cpp-benchmark
+git clone https://github.com/NPCAI-Studio/exllama.git
+cd exllama
 pip install -e .
 ```
 
-## Step 3: Install git-lfs
+## Step 4: Install git-lfs
 
-See instructions for installing git-lfs [here](https://github.com/git-lfs/git-lfs/blob/main/INSTALLING.md).
+Run the following command:
+
+```
+sudo apt-get install git-lfs
+```
 
 ## Step 4: Install a GPTQ model from HuggingFace
 
