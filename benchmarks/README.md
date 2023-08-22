@@ -7,6 +7,7 @@ This directory contains a benchmark script for Llama models via Exllama. Please 
 Run the following commands:
 
 ```
+sudo apt-get update
 sudo apt-get install python3.10
 sudo apt install python3-pip
 ```
@@ -16,7 +17,6 @@ sudo apt install python3-pip
 Run the follow command:
 
 ```
-sudo apt-get update
 sudo apt-get install git
 ```
 
