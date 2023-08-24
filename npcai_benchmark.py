@@ -48,7 +48,7 @@ def main(
         gpu_percent = "N/A"
         vram_usage = "N/A"
         final_input = f"After 'Q:', I have given you a roleplay scenario. Please form a response to this scenario. Q: {sequence}"
-        tokens = tokenizer.encode(final_input, max_seq_len = max_seq_len)
+        tokens = tokenizer.encode(final_input, max_seq_len = max_seq_len)[0]
 
         start_time = time.time()
         gen_text = generator.generate_simple(final_input, max_new_tokens = max_gen_len)
@@ -59,8 +59,7 @@ def main(
             gpu_percent = get_gpu_utilization()
             vram_usage = get_vram_usage()
 
-        gen_tokens = tokenizer.encode(gen_text, max_seq_len = max_gen_len)
-        print(f"*** gen_tokens: f{gen_tokens}")
+        gen_tokens = tokenizer.encode(gen_text, max_seq_len = max_gen_len)[0]
         gen_speed = len(gen_tokens) / (end_time - start_time)
 
         print()
