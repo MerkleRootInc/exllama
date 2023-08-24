@@ -3,6 +3,7 @@ import os, glob, psutil, time, fire, subprocess
 from model import ExLlama, ExLlamaCache, ExLlamaConfig
 from tokenizer import ExLlamaTokenizer
 from generator import ExLlamaGenerator
+from typing import Optional
 
 def main(
     model_dir: str,
@@ -13,6 +14,7 @@ def main(
     typical: float = 0.5,
     max_seq_len: int = 4096,
     max_gen_len: int = 512,
+    gpu_split: Optional[str] = None,
 ):
     # Locate files we need within the directory containing the model, tokenizer, and generator
     tokenizer_path = os.path.join(model_dir, "tokenizer.model")
@@ -23,6 +25,7 @@ def main(
     # Create config, model, tokenizer and generator
     config = ExLlamaConfig(model_config_path)               # create config from config.json
     config.model_path = model_path                          # supply path to model weights file
+    config.gpu_split = gpu_split
 
     model = ExLlama(config)                                 # create ExLlama instance and load the weights
     tokenizer = ExLlamaTokenizer(tokenizer_path)            # create tokenizer from tokenizer model file
