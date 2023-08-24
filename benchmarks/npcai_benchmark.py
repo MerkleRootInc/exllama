@@ -45,15 +45,15 @@ def main(
     print(f"Benchmarking inference for {len(input_sequences)} input sequences...\n")
 
     for sequence in input_sequences:
-        start_time = time.time()
         gpu_percent = "N/A"
         vram_usage = "N/A"
         final_input = f"After 'Q:', I have given you a roleplay scenario. Please form a response to this scenario. Q: {sequence}"
         tokens = tokenizer.encode(final_input, max_seq_len = max_seq_len)
 
+        start_time = time.time()
         gen_text = generator.generate_simple(final_input, max_new_tokens = max_gen_len)
-
         end_time = time.time()
+        
         cpu_percent = psutil.cpu_percent(interval=None)
         if has_nvidia_gpu():
             gpu_percent = get_gpu_utilization()
