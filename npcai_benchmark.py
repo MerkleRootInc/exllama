@@ -53,13 +53,14 @@ def main(
         start_time = time.time()
         gen_text = generator.generate_simple(final_input, max_new_tokens = max_gen_len)
         end_time = time.time()
-        
+
         cpu_percent = psutil.cpu_percent(interval=None)
         if has_nvidia_gpu():
             gpu_percent = get_gpu_utilization()
             vram_usage = get_vram_usage()
 
         gen_tokens = tokenizer.encode(gen_text, max_seq_len = max_gen_len)
+        print(f"*** gen_tokens: f{gen_tokens}")
         gen_speed = len(gen_tokens) / (end_time - start_time)
 
         print()
