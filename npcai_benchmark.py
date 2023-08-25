@@ -23,6 +23,7 @@ def main(
     model_path = glob.glob(st_pattern)[0]
 
     # Create config, model, tokenizer and generator
+    gpu_split = (',').join((str(x) for x in gpu_split))
     config = ExLlamaConfig(model_config_path)               # create config from config.json
     config.model_path = model_path                          # supply path to model weights file
     config.set_auto_map(gpu_split)                          # supply vram allocation per gpu
@@ -92,7 +93,9 @@ def has_nvidia_gpu():
 def get_gpu_utilization():
     try:
         result = subprocess.run(['nvidia-smi', '--query-gpu=utilization.gpu', '--format=csv,noheader,nounits'], capture_output=True, text=True)
-        return float(result.stdout.strip())
+        output = result.stdout.strip().split('\n')
+        utilization_list = [float(utilization) for utilization in output]
+        return utilization_list
     except Exception as e:
         print("Error:", e)
         return "N/A"
@@ -100,7 +103,9 @@ def get_gpu_utilization():
 def get_vram_usage():
     try:
         result = subprocess.run(['nvidia-smi', '--query-gpu=memory.used', '--format=csv,noheader,nounits'], capture_output=True, text=True)
-        return int(result.stdout.strip())
+        output = result.stdout.strip().split('\n')
+        usage_list = [float(usage) for usage in output]
+        return usage_list
     except Exception as e:
         print("Error:", e)
         return "N/A"
