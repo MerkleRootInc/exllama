@@ -37,7 +37,7 @@ sudo apt-get -y install cuda
 sudo apt install -y python3-pip git-lfs
 
 # Step 4: Clone & configure exllama repo
-git clone https://github.com/NPCAI-Studio/exllama.git
+git clone --progress --verbose https://github.com/NPCAI-Studio/exllama.git
 cd exllama
 git-lfs install
 pip install -r requirements.txt
@@ -46,7 +46,7 @@ sudo apt install -y ninja-build
 # Step 5: Install a GPTQ model from HuggingFace
 mkdir models
 cd ./models
-git clone https://huggingface.co/TheBloke/Llama-2-13B-chat-GPTQ
+git clone --progress --verbose https://huggingface.co/TheBloke/Llama-2-13B-chat-GPTQ
 
 # Step 6: Run the benchmark
 cd ..
