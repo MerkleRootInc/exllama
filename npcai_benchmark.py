@@ -25,7 +25,7 @@ def main(
     # Create config, model, tokenizer and generator
     config = ExLlamaConfig(model_config_path)               # create config from config.json
     config.model_path = model_path                          # supply path to model weights file
-    config.gpu_split = gpu_split
+    config.set_auto_map(gpu_split)                          # supply vram allocation per gpu
 
     model = ExLlama(config)                                 # create ExLlama instance and load the weights
     tokenizer = ExLlamaTokenizer(tokenizer_path)            # create tokenizer from tokenizer model file
